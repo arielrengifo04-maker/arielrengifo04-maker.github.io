@@ -41,19 +41,39 @@
     .links-section h2{font-family:"Playfair Display",serif;font-style:italic;font-size:clamp(2rem,5vw,3rem);color:var(--rose);margin-bottom:.5rem}
     .links-section .links-sub{font-style:italic;color:var(--mid);margin-bottom:3rem;font-size:1.1rem}
     .link-cards{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;max-width:700px;margin:0 auto}
-    .link-card{flex:1;min-width:250px;max-width:320px;background:#fff;border:2px solid var(--blush);border-radius:20px;padding:2.5rem 2rem;text-decoration:none;color:var(--dark);transition:all .3s;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(192,57,75,.08)}
+    .link-card{flex:1;min-width:250px;max-width:320px;background:#fff;border:2px solid var(--blush);border-radius:20px;padding:2.5rem 2rem;text-decoration:none;color:var(--dark);transition:all .3s;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(192,57,75,.08);cursor:pointer}
     .link-card::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,var(--rose),#e8748a);opacity:0;transition:opacity .3s}
     .link-card:hover{transform:translateY(-6px);box-shadow:0 16px 50px rgba(192,57,75,.2);border-color:var(--rose)}
     .link-card:hover::before{opacity:1}
     .link-card:hover .lc-icon,.link-card:hover .lc-title,.link-card:hover .lc-desc{color:#fff}
+
+    /* Estilos para botones bloqueados (de index.html) */
+    .link-card.locked{opacity:0.5;cursor:not-allowed;pointer-events:all}
+    .link-card.locked::before{background:linear-gradient(135deg,#999,#666);opacity:0.3}
+    .link-card.locked:hover{transform:none;box-shadow:0 4px 20px rgba(192,57,75,.08)}
+    .link-card.locked .lock-badge{display:block}
+    
+    .lock-badge{display:none;position:absolute;top:10px;right:10px;background:rgba(0,0,0,0.7);color:#fff;padding:0.3rem 0.6rem;border-radius:15px;font-size:0.75rem;font-family:"Dancing Script",cursive;z-index:3}
+
+    /* Modal para mensaje de bloqueo (de index.html) */
+    .lock-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:1000;align-items:center;justify-content:center;animation:fadeIn 0.3s ease}
+    .lock-modal.active{display:flex}
+    .lock-modal-content{background:#fff;border-radius:20px;padding:3rem 2rem;max-width:500px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:slideUp 0.4s ease;position:relative}
+    .lock-modal-icon{font-size:4rem;margin-bottom:1rem}
+    .lock-modal-title{font-family:"Playfair Display",serif;font-size:2rem;color:var(--rose);margin-bottom:1rem}
+    .lock-modal-message{font-size:1.1rem;color:var(--mid);margin-bottom:1.5rem;line-height:1.6}
+    .lock-modal-countdown{background:var(--blush);border-radius:15px;padding:1.5rem;margin:1.5rem 0}
+    .countdown-label{font-family:"Dancing Script",cursive;font-size:1.2rem;color:var(--rose);margin-bottom:0.8rem}
+    .countdown-timer{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+    .countdown-item{text-align:center}
+    .countdown-value{font-family:"Playfair Display",serif;font-size:2rem;font-weight:700;color:var(--rose);display:block}
+    .countdown-unit{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--mid)}
+    .lock-modal-close{background:var(--rose);color:#fff;border:none;padding:0.8rem 2rem;border-radius:25px;font-family:"Dancing Script",cursive;font-size:1.1rem;cursor:pointer;transition:background 0.3s;margin-top:1rem}
+    .lock-modal-close:hover{background:#8b1a2a}
+    
     .lc-icon{font-size:2.8rem;display:block;margin-bottom:1rem;position:relative;z-index:1}
     .lc-title{font-family:"Playfair Display",serif;font-size:1.5rem;font-weight:700;color:var(--rose);margin-bottom:.6rem;position:relative;z-index:1;transition:color .3s}
     .lc-desc{font-size:1rem;color:var(--mid);line-height:1.5;position:relative;z-index:1;transition:color .3s}
-    .link-input-wrap{margin-top:1rem;position:relative;z-index:2}
-    .link-input{width:100%;padding:.6rem 1rem;border:1.5px solid var(--blush);border-radius:10px;font-size:.9rem;font-family:"Cormorant Garamond",serif;background:rgba(255,255,255,.8);color:var(--dark);transition:border .3s;text-align:center}
-    .link-input:focus{outline:none;border-color:var(--rose)}
-    .link-go{display:inline-block;margin-top:.8rem;padding:.5rem 1.5rem;background:var(--rose);color:#fff;border:none;border-radius:20px;font-family:"Dancing Script",cursive;font-size:1.1rem;cursor:pointer;text-decoration:none;transition:background .3s}
-    .link-go:hover{background:#8b1a2a}
 
     /* MESSAGE */
     .message-section{position:relative;z-index:1;padding:6rem 2rem;display:flex;align-items:center;justify-content:center;background:var(--cream)}
@@ -67,12 +87,6 @@
     .gallery-section{position:relative;z-index:1;background:linear-gradient(180deg,var(--blush) 0%,#f5e6ea 100%);padding:5rem 2rem}
     .gallery-section h2{text-align:center;font-family:"Playfair Display",serif;font-style:italic;font-size:clamp(2rem,5vw,3.5rem);color:var(--rose);margin-bottom:.5rem}
     .gallery-section .gallery-sub{text-align:center;font-style:italic;color:var(--mid);font-size:1.1rem;margin-bottom:3rem}
-    .upload-area{max-width:400px;margin:0 auto 3rem;border:2px dashed var(--rose-light);border-radius:16px;padding:2.5rem 2rem;text-align:center;cursor:pointer;transition:all .3s;background:rgba(255,255,255,.5)}
-    .upload-area:hover,.upload-area.dragover{border-color:var(--rose);background:rgba(255,255,255,.85);transform:translateY(-2px);box-shadow:0 8px 30px rgba(192,57,75,.15)}
-    .upload-area .upload-icon{font-size:2.5rem;margin-bottom:.8rem}
-    .upload-area p{font-size:1rem;color:var(--mid);line-height:1.5}
-    .upload-area span{color:var(--rose);font-weight:600}
-    #file-input{display:none}
     .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;max-width:1100px;margin:0 auto}
     .photo-item{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:1;box-shadow:0 4px 20px rgba(43,26,30,.15);transform:rotate(var(--r,0deg));transition:transform .3s,box-shadow .3s;cursor:pointer}
     .photo-item:hover{transform:rotate(0deg) scale(1.04)!important;box-shadow:0 14px 45px rgba(43,26,30,.28);z-index:2}
@@ -85,7 +99,6 @@
     /* Special first photo */
     .photo-first{border:3px solid var(--gold)!important;box-shadow:0 4px 25px rgba(201,151,90,.4)!important}
     .photo-first:hover{box-shadow:0 14px 50px rgba(201,151,90,.5)!important}
-    .first-badge{position:absolute;top:10px;left:10px;background:var(--gold);color:#fff;font-family:"Dancing Script",cursive;font-size:.95rem;padding:.3rem .8rem;border-radius:20px;z-index:3;box-shadow:0 2px 8px rgba(0,0,0,.2)}
 
     /* LIGHTBOX */
     #lightbox{display:none;position:fixed;inset:0;background:rgba(27,10,14,.94);z-index:1000;align-items:center;justify-content:center;flex-direction:column}
@@ -101,8 +114,9 @@
 
     @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
     @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-    @keyframes shimmer{0%{left:-100%}100%{left:150%}}
     @keyframes heartbeat{0%,100%{transform:scale(1)}14%{transform:scale(1.18)}28%{transform:scale(1)}42%{transform:scale(1.12)}56%{transform:scale(1)}}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    @keyframes slideUp{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:translateY(0)}}
   </style>
 </head>
 <body>
@@ -140,17 +154,18 @@
   </div>
 </section>
 
-<!-- LINKS SECTION -->
 <section class="links-section">
   <h2>Para mi Peque</h2>
   <p class="links-sub">Dos puertas</p>
   <div class="link-cards">
-    <a class="link-card" href="https://www.canva.com/design/DAHBRIlgN3Q/X6FF3kRfXA-LaNf1Mn1BHw/edit?utm_content=DAHBRIlgN3Q&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank">
+    <a class="link-card locked" id="revista-link" data-href="https://www.canva.com/design/DAHBRIlgN3Q/X6FF3kRfXA-LaNf1Mn1BHw/edit?utm_content=DAHBRIlgN3Q&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">
+      <span class="lock-badge">🔒 Bloqueado</span>
       <span class="lc-icon">📖</span>
       <div class="lc-title">Nuestra Revista</div>
       <div class="lc-desc">El camino que hemos recorrido juntos</div>
     </a>
-    <a class="link-card" href="https://www.canva.com/design/DAHBRJFvb0w/5UDqsYM6l-4hX0SyJdkMBA/edit?utm_content=DAHBRJFvb0w&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank">
+    <a class="link-card locked" id="carta-link" data-href="https://www.canva.com/design/DAHBRJFvb0w/5UDqsYM6l-4hX0SyJdkMBA/edit?utm_content=DAHBRJFvb0w&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">
+      <span class="lock-badge">🔒 Bloqueado</span>
       <span class="lc-icon">💌</span>
       <div class="lc-title">Carta para Ti</div>
       <div class="lc-desc">Todo lo que mi corazón quiere decirte, escrito con amor</div>
@@ -158,9 +173,42 @@
   </div>
 </section>
 
+<div class="lock-modal" id="lockModal">
+  <div class="lock-modal-content">
+    <div class="lock-modal-icon">🔒</div>
+    <div class="lock-modal-title">¡Aún no disponible!</div>
+    <div class="lock-modal-message">
+      Este contenido especial estará disponible el <strong>30 de Marzo de 2026</strong>.<br>
+      La espera valdrá la pena... ❤️
+    </div>
+    <div class="lock-modal-countdown">
+      <div class="countdown-label">Tiempo restante:</div>
+      <div class="countdown-timer" id="countdownTimer">
+        <div class="countdown-item">
+          <span class="countdown-value" id="cd-days">0</span>
+          <span class="countdown-unit">Días</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-value" id="cd-hours">0</span>
+          <span class="countdown-unit">Horas</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-value" id="cd-mins">0</span>
+          <span class="countdown-unit">Min</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-value" id="cd-secs">0</span>
+          <span class="countdown-unit">Seg</span>
+        </div>
+      </div>
+    </div>
+    <button class="lock-modal-close" onclick="closeLockModal()">Entendido</button>
+  </div>
+</div>
+
 <section class="gallery-section">
   <h2>Nuestros Momentos</h2>
-  <p class="gallery-sub">Cada foto, un recuerdo que guardo en mi corazón</p>
+  <p class="gallery-sub">Cada foto es un recuerdo que guardo en mi corazón</p>
 
   <div class="photo-grid" id="photo-grid">
 
@@ -255,11 +303,93 @@
 
 <footer>
   <span class="footer-heart">❤</span>
-  <p>Hecho por Tu chinis · San Valentín 2025</p>
+  <p>Hecho por Tu ojon · San Valentín 2025</p>
 </footer>
 
 <script>
-// Counter
+// Fecha de desbloqueo: 30 de marzo de 2026
+const UNLOCK_DATE = new Date("2026-03-30T00:00:00");
+
+// Función para verificar si los botones deben estar bloqueados
+function checkLockStatus() {
+  const now = new Date();
+  const isLocked = now < UNLOCK_DATE;
+  
+  const revistaLink = document.getElementById("revista-link");
+  const cartaLink = document.getElementById("carta-link");
+  
+  if (isLocked) {
+    revistaLink.classList.add("locked");
+    cartaLink.classList.add("locked");
+    
+    // Agregar eventos de clic para mostrar el modal
+    revistaLink.addEventListener("click", showLockModal);
+    cartaLink.addEventListener("click", showLockModal);
+  } else {
+    // Desbloquear los botones
+    revistaLink.classList.remove("locked");
+    cartaLink.classList.remove("locked");
+    
+    // Cambiar a enlaces normales
+    revistaLink.href = revistaLink.getAttribute("data-href");
+    cartaLink.href = cartaLink.getAttribute("data-href");
+    revistaLink.target = "_blank";
+    cartaLink.target = "_blank";
+    
+    // Remover eventos de clic
+    revistaLink.removeEventListener("click", showLockModal);
+    cartaLink.removeEventListener("click", showLockModal);
+    
+    // Ocultar badges de bloqueo
+    document.querySelectorAll(".lock-badge").forEach(badge => badge.style.display = "none");
+  }
+}
+
+// Mostrar modal de bloqueo
+function showLockModal(e) {
+  e.preventDefault();
+  document.getElementById("lockModal").classList.add("active");
+  updateCountdown(); 
+}
+
+// Cerrar modal de bloqueo
+function closeLockModal() {
+  document.getElementById("lockModal").classList.remove("active");
+}
+
+// Actualizar countdown del modal
+function updateCountdown() {
+  const now = new Date();
+  const diff = UNLOCK_DATE - now;
+  
+  if (diff <= 0) {
+    document.getElementById("cd-days").textContent = "0";
+    document.getElementById("cd-hours").textContent = "0";
+    document.getElementById("cd-mins").textContent = "0";
+    document.getElementById("cd-secs").textContent = "0";
+    checkLockStatus();
+    return;
+  }
+  
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const secs = Math.floor((diff % (1000 * 60)) / 1000);
+  
+  document.getElementById("cd-days").textContent = days;
+  document.getElementById("cd-hours").textContent = hours;
+  document.getElementById("cd-mins").textContent = mins;
+  document.getElementById("cd-secs").textContent = secs;
+}
+
+// Cerrar modal al hacer clic fuera
+document.getElementById("lockModal").addEventListener("click", function(e) {
+  if (e.target === this) {
+    closeLockModal();
+  }
+});
+
+// Contador principal
 function updateCounter(){
   const start=new Date("2020-03-30T15:00:00"),now=new Date(),diff=now-start;
   let s=Math.floor(diff/1000),sec=s%60,r=Math.floor(s/60),min=r%60,r2=Math.floor(r/60),hrs=r2%24,total=Math.floor(r2/24);
@@ -274,7 +404,19 @@ function updateCounter(){
   document.getElementById("cnt-secs").textContent=String(sec).padStart(2,"0");
   document.getElementById("cnt-total-days").textContent="✨ ¡"+total.toLocaleString("es-ES")+" días de Historia! ✨";
 }
-updateCounter(); setInterval(updateCounter,1000);
+
+updateCounter(); 
+setInterval(updateCounter,1000);
+
+// Actualizar countdown cada segundo cuando el modal esté abierto
+setInterval(function() {
+  if (document.getElementById("lockModal").classList.contains("active")) {
+    updateCountdown();
+  }
+}, 1000);
+
+// Verificar estado de bloqueo al cargar
+checkLockStatus();
 
 // Lightbox
 const lightbox=document.getElementById("lightbox"),lbImg=document.getElementById("lightbox-img"),lbCap=document.getElementById("lightbox-caption");
